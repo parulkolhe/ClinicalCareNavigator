@@ -1,0 +1,27 @@
+EMERGENCY_SYMPTOMS={
+"chest_pain",
+"shortness_of_breath",
+"loss_of_consciousness",
+"severe_bleeding",
+"blue_lips",
+"no_pulse"
+}
+
+HIGH_RISK={
+"high_fever",
+"confusion",
+"stiff_neck",
+"severe_headache"
+}
+
+def triage(symptoms):
+
+    symptoms=set(symptoms)
+
+    if symptoms & EMERGENCY_SYMPTOMS:
+        return "emergency"
+
+    if symptoms & HIGH_RISK:
+        return "high"
+
+    return "normal"

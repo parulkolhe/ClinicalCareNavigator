@@ -1,0 +1,19 @@
+import json
+
+with open("backend/data/symptom_synonyms.json") as f:
+    synonym_map = json.load(f)
+
+def normalize(symptoms):
+
+    normalized = []
+
+    for s in symptoms:
+
+        s = s.lower()
+
+        if s in synonym_map:
+            normalized.append(synonym_map[s])
+        else:
+            normalized.append(s)
+
+    return normalized

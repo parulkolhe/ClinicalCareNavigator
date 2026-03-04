@@ -1,0 +1,39 @@
+import pandas as pd
+
+df=pd.read_csv("backend/data/disease_dataset.csv")
+
+disease_map={}
+
+for _,row in df.iterrows():
+
+    disease_map[row["disease"]]={
+        "symptoms":set(row["symptoms"].split()),
+        "system":row["system"],
+        "risk":row["risk"]
+    }
+
+def predict(symptoms):
+
+    symptoms=set(symptoms)
+
+    scores=[]
+
+    for disease,data in disease_map.items():
+
+        overlap=len(symptoms & data["symptoms"])
+
+        if overlap==0:
+            continue
+
+        prob=overlap/len(data["symptoms"])
+
+        scores.append({
+            "disease":disease,
+            "confidence":round(prob*100,2),
+            "system":data["system"],
+            "risk":data["risk"]
+        })
+
+    scores.sort(key=lambda x:x["confidence"],reverse=True)
+
+    return scores[:5]

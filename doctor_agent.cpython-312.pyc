@@ -1,0 +1,12 @@
+DOCTOR_MAP={
+"respiratory":"Pulmonologist",
+"cardiac":"Cardiologist",
+"neurological":"Neurologist",
+"digestive":"Gastroenterologist",
+"skin":"Dermatologist",
+"general":"General Physician"
+}
+
+def get_doctor(system):
+
+    return DOCTOR_MAP.get(system,"General Physician")
